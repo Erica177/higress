@@ -369,7 +369,9 @@ func (w *watcher) unsubscribe(groupName string, dataId string) error {
 		return err
 	}
 	key := strings.Join([]string{w.Name, w.NacosNamespace, groupName, dataId}, DefaultJoiner)
-	w.configToConfigListener[key].Stop()
+	if l, exist := w.configToConfigListener[key]; exist {
+		l.Stop()
+	}
 	delete(w.watchingConfigRefs, key)
 	delete(w.configToConfigListener, key)
 	// remove service for this config
