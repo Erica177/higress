@@ -640,7 +640,11 @@ func (w *watcher) buildMcpServerForMcpServer(vs *v1alpha3.VirtualService, dataId
 	}
 }
 
-func generateDrForMcpServer(host, protocol string) *v1alpha3.DestinationRule {
+func generateDrForMcpServer(host string, mcpServer *provider.McpServer) *v1alpha3.DestinationRule {
+	protocol := mcpServer.Protocol
+	if mcpServer.RemoteServerConfig != nil && mcpServer.RemoteServerConfig.ServiceRef != nil && mcpServer.RemoteServerConfig.ServiceRef.TransportProtocol != "" {
+		protocol = mcpServer.RemoteServerConfig.ServiceRef.TransportProtocol
+	}
 	switch protocol {
 	case provider.McpSSEProtocol:
 		return &v1alpha3.DestinationRule{
