@@ -396,7 +396,7 @@ func (w *watcher) processServerConfig(dataId string, services *model.Service, mc
 	}
 	// if protocol is sse, we should apply ConsistentHash policy for this service
 	// if protocol is https, we should apply tls policy for this service
-	destinationRule := generateDrForMcpServer(serviceHost, mcpServer.Protocol)
+	destinationRule := generateDrForMcpServer(serviceHost, mcpServer)
 	if destinationRule != nil {
 		dr := &config.Config{
 			Meta: config.Meta{
