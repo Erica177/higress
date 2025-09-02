@@ -412,6 +412,7 @@ func (w *watcher) processServerConfig(dataId string, services *model.Service, mc
 }
 
 func (w *watcher) processToolConfig(dataId, data string, credentials map[string]interface{}, server *provider.McpServer) error {
+	mcpServerLog.Infof("receive config : %s", data)
 	if server.Protocol != provider.HttpProtocol && server.Protocol != provider.HttpsProtocol {
 		return nil
 	}
@@ -494,6 +495,7 @@ func (w *watcher) processToolConfig(dataId, data string, credentials map[string]
 
 		rule.Tools = append(rule.Tools, convertTool)
 	}
+	mcpServerLog.Infof("final config %v", rule)
 
 	rule.AllowTools = allowTools
 	wasmPluginConfig := &config.Config{

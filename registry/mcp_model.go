@@ -59,13 +59,13 @@ type McpTool struct {
 	RequestTemplate       *RequestTemplate  `json:"requestTemplate"`
 	ResponseTemplate      *ResponseTemplate `json:"responseTemplate"`
 	ErrorResponseTemplate string            `json:"errorResponseTemplate,omitempty"`
-	Security              *ToolSecurity     `json:"security"`
+	Security              *ToolSecurity     `json:"security,omitempty"`
 }
 
 type ToolSecurity struct {
 	Id          string `json:"type,omitempty"`
 	PassThrough bool   `json:"passthrough,omitempty"`
-	Credential  string `json:"credential"`
+	Credential  string `json:"credential,omitempty"`
 }
 
 type ToolArgs struct {
